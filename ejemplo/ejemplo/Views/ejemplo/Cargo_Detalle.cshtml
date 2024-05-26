@@ -1,0 +1,48 @@
+﻿@model ejemplo.Models.ViewModels.CargoVM
+
+@{
+    ViewData["Title"] = "Cargo_Detalle";
+    Layout = "~/Views/shared/_layout.cshtml";
+}
+
+@if (Model.oCargo.IdCargo == 0)
+{
+    <h1>Crear Cargo</h1>
+}
+else
+{
+    <h1>Editar Cargo</h1>
+}
+
+<div class="row">
+    <div class="col-sm-4">
+        <form asp-action="Cargo_Detalle" asp-controller="ejemplo" method="post">
+            @if (Model.oCargo.IdCargo != 0)
+            {
+                <input type="hidden" asp-for="oCargo.IdCargo" />
+                <!-- Un campo de entrada oculto para enviar el IdCargo al controlador cuando se actualiza un objeto existente -->
+            }
+
+            <div class="mb-2">
+                <label class="form-label" asp-for="oCargo.Descripcion">Descripcion</label>
+                <input class="form-control form-control-sm" asp-for="oCargo.Descripcion" type="text" />
+                <!-- Campo de entrada para la propiedad Descripcion del objeto oCargo -->
+            </div>
+
+            <div class="mb-2">
+                <button class="btn btn-primary btn-sm w-25" type="submit">
+                    @if (Model.oCargo.IdCargo == 0)
+                    {
+                        <span>Crear</span>
+                    }
+                    else
+                    {
+                        <span>Actualizar</span>
+                    }
+                </button>
+                <a class="btn btn-dark btn-sm" asp-action="GestionCargo" asp-controller="ejemplo">Volver</a>
+                <!-- Botón de envío y enlace para volver -->
+            </div>
+        </form>
+    </div>
+</div>

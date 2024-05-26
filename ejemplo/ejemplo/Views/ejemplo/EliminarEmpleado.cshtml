@@ -1,0 +1,47 @@
+﻿@model ejemplo.Models.Empleado
+@{
+    ViewData["Title"] = "EliminarEmpleado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="text-danger">¿Está seguro de eliminar el empleado?</h3>
+<hr />
+<div class="row">
+    <div class="col-sm-4">
+        <form asp-action="Eliminar" asp-controller="ejemplo" method="post">
+            <input type="hidden" asp-for="IdEmpleado" />
+            <!-- Campo de entrada oculto para enviar el IdEmpleado al controlador -->
+
+            <div class="mb-2">
+                <label class="form-label" asp-for="NombreCompleto">Nombre completo</label>
+                <input class="form-control form-control-sm" asp-for="NombreCompleto" type="text" readonly />
+                <!-- Campo de entrada de solo lectura para mostrar el nombre completo del empleado -->
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label" asp-for="Correo">Correo</label>
+                <input class="form-control form-control-sm" asp-for="Correo" type="text" readonly />
+                <!-- Campo de entrada de solo lectura para mostrar el correo del empleado -->
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label" asp-for="Telefono">Telefono</label>
+                <input class="form-control form-control-sm" asp-for="Telefono" type="text" readonly />
+                <!-- Campo de entrada de solo lectura para mostrar el teléfono del empleado -->
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="IdCargo">Cargo</label>
+                <input class="form-control form-control-sm" asp-for="oCargo" type="text" readonly />
+                <!-- Campo de entrada de solo lectura para mostrar el cargo del empleado -->
+            </div>
+
+            <div class="mb-2">
+                <button class="btn btn-danger btn-sm w-25" type="submit">Eliminar</button>
+                <!-- Botón para enviar el formulario y eliminar el empleado -->
+                <a class="btn btn-dark btn-sm" asp-action="GestionEmpleado" asp-controller="ejemplo">Volver</a>
+                <!-- Enlace para volver a la página de gestión de empleados -->
+            </div>
+        </form>
+    </div>
+</div>

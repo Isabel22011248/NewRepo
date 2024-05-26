@@ -1,0 +1,81 @@
+﻿@model List<Cargo>
+
+@{
+    ViewData["Title"] = "GestionCargos";
+}
+
+<!-- Sección para mostrar el listado de cargos -->
+<div class="card">
+    <div class="card-header">
+        <h5>Lista de cargos</h5>
+    </div>
+
+    <div class="card-body">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="buscarNombre" placeholder="Buscar por nombre de cargo">
+                <!-- Campo de entrada para buscar cargos por nombre -->
+            </div>
+            <div class="col-md-6">
+                <a class="btn btn-success btn-sm" asp-action="Cargo_Detalle" asp-controller="ejemplo" asp-route-idEmpleado="0">Crear Nuevo</a>
+                <!-- Enlace para crear un nuevo cargo -->
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Descripción</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Descripcion</td>
+                        <!-- Mostrar la descripción del cargo en la tabla -->
+                        <td>
+                            <a class="btn btn-primary btn-sm" asp-action="Cargo_Detalle" asp-controller="ejemplo" asp-route-idCargo="@item.IdCargo">Editar</a>
+                            <!-- Enlace para editar el cargo -->
+                            <a class="btn btn-danger btn-sm" asp-action="EliminarCargo" asp-controller="ejemplo" asp-route-idCargo="@item.IdCargo">Eliminar Cargo</a>
+                            <!-- Enlace para eliminar el cargo -->
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- JavaScript para filtrar la tabla por nombre completo -->
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#buscarNombre').on('keyup', function () {
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("buscarNombre");
+                filter = input.value.toUpperCase();
+                table = document.getElementsByTagName("table")[0];
+                tr = table.getElementsByTagName("tr");
+
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            });
+
+            // Evitar la propagación de eventos en el teclado en el campo de búsqueda
+            $('#buscarNombre').on('keydown', function (event) {
+                event.stopImmediatePropagation();
+            });
+        });
+    </script>
+}

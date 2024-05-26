@@ -1,0 +1,36 @@
+﻿@model ejemplo.Models.Cargo
+@{
+    ViewData["Title"] = "EliminarCargo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="text-danger">¿Está seguro de eliminar el cargo?</h3>
+<hr />
+
+<div class="row">
+    <div class="col-sm-4">
+        <form asp-action="EliminarCargo" asp-controller="ejemplo" method="post">
+            <input type="hidden" asp-for="IdCargo" />
+            <!-- Campo de entrada oculto para enviar el IdCargo al controlador -->
+
+            <div class="mb-2">
+                <label class="form-label" asp-for="Descripcion">Descripción</label>
+                <input class="form-control form-control-sm" asp-for="Descripcion" type="text" readonly />
+                <!-- Campo de entrada de solo lectura para mostrar la Descripcion del cargo -->
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="IdCargo">Cargo</label>
+                <input class="form-control form-control-sm" asp-for="IdCargo" type="text" readonly />
+                <!-- Campo de entrada de solo lectura para mostrar el IdCargo del cargo -->
+            </div>
+
+            <div class="mb-2">
+                <button class="btn btn-danger btn-sm w-25" type="submit">Eliminar</button>
+                <!-- Botón para enviar el formulario y eliminar el cargo -->
+                <a class="btn btn-dark btn-sm" asp-action="GestionCargo" asp-controller="ejemplo">Volver</a>
+                <!-- Enlace para volver a la página de gestión de cargos -->
+            </div>
+        </form>
+    </div>
+</div>
